@@ -22,7 +22,7 @@ class SendSlackWebhookCommand extends Command
 	 *
 	 * @var string
 	 */
-	protected $description = 'Command description';
+	protected $description = 'Send notification to a Slack webhook.';
 
 	/**
 	 * Execute the console command.

@@ -3,7 +3,6 @@
 namespace App\Commands;
 
 use App\SlackWebhook;
-use Illuminate\Console\Scheduling\Schedule;
 use LaravelZero\Framework\Commands\Command;
 
 class SlackWebhookSetDefaultCommand extends Command
@@ -21,7 +20,7 @@ class SlackWebhookSetDefaultCommand extends Command
 	 *
 	 * @var string
 	 */
-	protected $description = 'Command description';
+	protected $description = 'Set a Slack webhook as the default.';
 
 	/**
 	 * Execute the console command.
@@ -51,16 +50,5 @@ class SlackWebhookSetDefaultCommand extends Command
 		$this->info("'{$webhook->name}' is now the default Slack webhook.");
 
 		return self::SUCCESS;
-	}
-
-	/**
-	 * Define the command's schedule.
-	 *
-	 * @param  \Illuminate\Console\Scheduling\Schedule $schedule
-	 * @return void
-	 */
-	public function schedule(Schedule $schedule): void
-	{
-		// $schedule->command(static::class)->everyMinute();
 	}
 }
