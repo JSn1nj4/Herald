@@ -31,23 +31,42 @@ class SendSlackWebhookCommand extends Command
 	 */
 	public function handle()
 	{
-		if($this->option('name') === 'default') {
-			$webhook = SlackWebhook::firstWhere('default', true);
-		} else {
-			$webhook = SlackWebhook::firstwhere('name', $this->option('name'));
+		if($this->option('name') !== 'default') {
+			return $this->useNamed();
 		}
 
-		if(!$webhook) {
-			$this->error("A matching webhook could not be found.");
+		return $this->useDefault();
+	}
+
+	private function useDefault(): int
+	{
+		if(!$webhook = SlackWebhook::firstWhere('default', true)) {
+			$this->error("No default webhook set.");
 
 			return self::FAILURE;
 		}
 
+		return $this->send($webhook);
+	}
+
+	private function useNamed(): int
+	{
+		if(!$webhook = SlackWebhook::firstwhere('name', $this->option('name'))) {
+			$this->error("A webhook named '{$this->option('name')}' could not be found.");
+
+			return self::FAILURE;
+		}
+
+		return $this->send($webhook);
+	}
+
+	private function send(SlackWebhook $webhook): int
+	{
 		$response = Http::post($webhook->url, [
 			'text' => $this->argument('message'),
 		]);
 
-		if($response->failed()) {
+		if ($response->failed()) {
 			$response->throw();
 
 			return self::FAILURE;
