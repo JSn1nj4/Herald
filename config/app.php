@@ -57,4 +57,17 @@ return [
         App\Providers\AppServiceProvider::class,
     ],
 
+	/*
+    |--------------------------------------------------------------------------
+    | Default application data storage location
+    |--------------------------------------------------------------------------
+    |
+    | This is the directory where application data should live. It's user-
+	| customizable via APP_STORAGE in .env, but all data will live in the
+	| user's home directory under ".herald" by default.
+    |
+    */
+
+	'storage' => env('APP_STORAGE', $_SERVER['HOME'] . '/.herald'),
+
 ];
