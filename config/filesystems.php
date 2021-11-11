@@ -12,6 +12,6 @@ return [
 		'data' => [
 			'driver' => 'local',
 			'root' => config('app.storage'),
-		]
+		],
 	],
 ];

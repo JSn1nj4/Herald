@@ -40,7 +40,7 @@ return [
     |
     */
 
-    'env' => 'development',
+    'env' => env('APP_ENV', 'production'),
 
     /*
     |--------------------------------------------------------------------------
@@ -68,6 +68,9 @@ return [
     |
     */
 
-	'storage' => env('APP_STORAGE', $_SERVER['HOME'] . '/.herald'),
+	'storage' => env('APP_STORAGE', $_SERVER['HOME'] . match(env('APP_ENV')) {
+		'development', 'local' => '/.herald-dev',
+		default => '/.herald' // behaves as if in production by default
+	}),
 
 ];
