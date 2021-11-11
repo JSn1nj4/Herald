@@ -5,28 +5,26 @@ namespace App\Commands;
 use Illuminate\Support\Facades\Storage;
 use LaravelZero\Framework\Commands\Command;
 
-class InstallCommand extends Command
+class InitCommand extends Command
 {
 	/**
 	 * The signature of the command.
 	 *
 	 * @var string
 	 */
-	protected $signature = 'install';
+	protected $signature = 'init';
 
 	/**
 	 * The description of the command.
 	 *
 	 * @var string
 	 */
-	protected $description = 'Run application install procedure.';
+	protected $description = 'Run initialize procedure.';
 
 	/**
 	 * Execute the console command.
-	 *
-	 * @return mixed
 	 */
-	public function handle()
+	public function handle(): int
 	{
 		if (!Storage::exists('database.sqlite')) {
 			Storage::put('database.sqlite', '');
