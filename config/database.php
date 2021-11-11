@@ -144,4 +144,14 @@ return [
 
     ],
 
+	/*
+     * If true, migrations commands will be available.
+     */
+	'with-migrations' => config('app.env') !== 'production',
+
+	/*
+     * If true, seeds commands will be available.
+     */
+	'with-seeds' => config('app.env') !== 'production',
+
 ];
